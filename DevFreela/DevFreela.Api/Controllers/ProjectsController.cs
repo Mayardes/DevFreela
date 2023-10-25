@@ -1,11 +1,13 @@
 using DevFreela.Api.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace DevFreela.Api.Controllers;
 
 [Route("v1/projects")]
 public class ProjectsController : ControllerBase
 {
+    
     [HttpGet("")]
     public IActionResult Get(string queryString)
     {
