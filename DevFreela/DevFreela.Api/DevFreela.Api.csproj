@@ -23,4 +23,9 @@
       <ProjectReference Include="..\DevFreela.Core\DevFreela.Core.csproj" />
     </ItemGroup>
 
+
+    <ItemGroup>
+      <Compile Remove="Controllers\WeatherForecastController.cs" />
+    </ItemGroup>
+
 </Project>
