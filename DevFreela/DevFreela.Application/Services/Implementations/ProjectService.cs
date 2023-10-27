@@ -58,21 +58,7 @@ public class ProjectService : IProjectService
     /// <returns></returns>
     public ICollection<ProjectViewModel> GetAll(string queryString)
     {
-        var result = _dbcontext.Projects.Select(x => new ProjectViewModel()
-        {
-            Name = x.Name,
-            Title = x.Title,
-            Description = x.Description,
-            IdClient = x.IdClient,
-            IdFreelancer = x.IdFreelancer,
-            TotalCost = x.TotalCost,
-            CreatedAt = x.CreatedAt,
-            StartedAt = x.StartedAt,
-            Comments = x.Comments,
-            
-        }).ToList();
-        
-        return result;
+        return _dbcontext.Projects.Select(x => new ProjectViewModel(x.Id, x.Title, x.CreatedAt)).ToList();
     }
 
     
