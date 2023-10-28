@@ -8,7 +8,5 @@ public interface IUserService
     UserViewModel GetById(Guid id);
     void Post(CreateUserModel model);
     void PostComments(CreateCommentModel model, Guid id);
-    void Start(Guid id);
-    void Finish(Guid id);
     void Login(LoginModel model, Guid id);
 }

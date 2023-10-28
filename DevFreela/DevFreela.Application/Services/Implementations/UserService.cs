@@ -42,17 +42,7 @@ public class UserService : IUserService
         
         _context.ProjectComments.Add(newComment);
     }
-
-    public void Start(Guid id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Finish(Guid id)
-    {
-        throw new NotImplementedException();
-    }
-
+    
     public void Login(LoginModel model, Guid id)
     {
         throw new NotImplementedException();
