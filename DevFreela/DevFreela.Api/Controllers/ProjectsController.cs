@@ -1,4 +1,5 @@
 using DevFreela.Api.Models;
+using DevFreela.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
@@ -7,6 +8,12 @@ namespace DevFreela.Api.Controllers;
 [Route("v1/projects")]
 public class ProjectsController : ControllerBase
 {
+    private readonly IProjectService _projectService;
+    public ProjectsController(IOptions<IProjectService> projectService)
+    {
+        _projectService = projectService.Value;
+    }
+    
     [HttpGet("")]
     public IActionResult Get(string queryString)
     {
