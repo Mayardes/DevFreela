@@ -7,6 +7,7 @@ public class Project : BaseEntity
 {
     public Project(string name, string title, string description, Guid idClient, Guid idFreelancer, decimal totalCost)
     {
+        Id = Guid.NewGuid();
         Name = name;
         Title = title;
         Description = description;

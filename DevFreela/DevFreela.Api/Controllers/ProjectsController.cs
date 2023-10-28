@@ -1,4 +1,5 @@
 using DevFreela.Api.Models;
+using DevFreela.Application.InputModels.Project;
 using DevFreela.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -9,32 +10,38 @@ namespace DevFreela.Api.Controllers;
 public class ProjectsController : ControllerBase
 {
     private readonly IProjectService _projectService;
-    public ProjectsController(IOptions<IProjectService> projectService)
+    public ProjectsController(IProjectService projectService)
     {
-        _projectService = projectService.Value;
+        _projectService = projectService;
     }
     
     [HttpGet("")]
     public IActionResult Get(string queryString)
     {
-        return Ok();
+        var project = _projectService.GetAll(queryString);
+        return Ok(project);
     }
 
     [HttpGet("{id:Guid}")]
     public IActionResult GetById(Guid id)
     {
-        return Ok();
+        var project = _projectService.GetById(id);
+        return Ok(project);
     }
 
     [HttpPost]
-    public IActionResult Post([FromBody] CreateProjectModel model)
+    public IActionResult Post([FromBody] CreateProjectInputModel model)
     {
-        return Created("GetById", model.Id);
+        var id = _projectService.Create(model);
+        return Created("GetById", id);
     }
 
     [HttpPut("{id:Guid}")]
-    public IActionResult Put([FromBody] UpdateProjectModel model, Guid id)
+    public IActionResult Put([FromBody] UpdateProjectInputModel model, Guid id)
     {
+        model.SetId(id);
+        _projectService.Update(model);
+        
         var routeValues = new
         {
             id
@@ -45,6 +52,29 @@ public class ProjectsController : ControllerBase
     [HttpDelete("{id:Guid}")]
     public IActionResult Delete(Guid id)
     {
+        _projectService.Delete(id);
         return NoContent();
     }
+
+    [HttpPost]
+    public IActionResult PostComment(Guid id, [FromBody] CreateCommentInputModel model)
+    {
+        _projectService.CreateComment(model);
+        return NoContent();
+    }
+
+    [HttpPut("{id}/start")]
+    public IActionResult Start(Guid id)
+    {
+        _projectService.Start(id);
+        return NoContent();
+    }
+
+    [HttpPut("{id}/finish")]
+    public IActionResult Finish(Guid id)
+    {
+        _projectService.Finish(id);
+        return NoContent();
+    }
+    
 }

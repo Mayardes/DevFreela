@@ -117,6 +117,6 @@ public class ProjectService : IProjectService
         var project = _dbcontext.Projects.Find(x => x.Id == model.Id)
                       ?? throw new Exception("Project not found.");
 
-        project.Update(title: model.Title, description: model.Description, totalCost: model.TotalCost);
+        project.Update(title: project.Title, description: model.Description, totalCost: project.TotalCost);
     }
 }
