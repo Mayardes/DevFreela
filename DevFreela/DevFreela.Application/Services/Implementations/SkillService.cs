@@ -16,6 +16,6 @@ public class SkillService : ISkillService
     public List<SkillViewModel> GetAll()
     {
        return _dbContext.Skills.Select(p => new SkillViewModel()
-            { Id = p.Id, Description = p.Description, IdProject = p.Id }).ToList();
+            { Id = p.Id, Description = p.Description}).ToList();
     }
 }
