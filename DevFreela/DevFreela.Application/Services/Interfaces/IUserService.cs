@@ -1,4 +1,4 @@
-using DevFreela.Api.Models;
+using DevFreela.Application.InputModels.User;
 using DevFreela.Application.ViewModels.User;
 
 namespace DevFreela.Application.Services.Interfaces;
@@ -6,7 +6,7 @@ namespace DevFreela.Application.Services.Interfaces;
 public interface IUserService
 {
     UserViewModel GetById(Guid id);
-    void Post(CreateUserModel model);
-    void PostComments(CreateCommentModel model, Guid id);
-    void Login(LoginModel model, Guid id);
+    void Post(CreateUserInputModel model);
+    void PostComments(CreateCommentInputModel model, Guid id);
+    void Login(LoginInputModel model, Guid id);
 }

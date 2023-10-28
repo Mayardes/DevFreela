@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\DevFreela.Api\DevFreela.Api.csproj" />
     <ProjectReference Include="..\DevFreela.Core\DevFreela.Core.csproj" />
     <ProjectReference Include="..\DevFreela.Infrastructure\DevFreela.Infrastructure.csproj" />
   </ItemGroup>
@@ -24,6 +23,7 @@
   <ItemGroup>
     <None Remove="InputModels\Skill\**" />
   </ItemGroup>
+
 
 
   <PropertyGroup>

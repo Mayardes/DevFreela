@@ -1,4 +1,4 @@
-using DevFreela.Api.Models;
+using DevFreela.Application.InputModels.User;
 using DevFreela.Application.Services.Interfaces;
 using DevFreela.Application.ViewModels.User;
 using DevFreela.Core.Entities;
@@ -27,13 +27,13 @@ public class UserService : IUserService
         };
     }
 
-    public void Post(CreateUserModel model)
+    public void Post(CreateUserInputModel model)
     {
         var newUser = new User(model.UserName, model.Email, model.BirthDate);
         _context.User.Add(newUser);
     }
 
-    public void PostComments(CreateCommentModel model, Guid id)
+    public void PostComments(CreateCommentInputModel model, Guid id)
     {
         var comment = _context.ProjectComments.Find(x => x.Id == id)
                       ?? throw new Exception("Post not found.");
@@ -43,7 +43,7 @@ public class UserService : IUserService
         _context.ProjectComments.Add(newComment);
     }
     
-    public void Login(LoginModel model, Guid id)
+    public void Login(LoginInputModel model, Guid id)
     {
         throw new NotImplementedException();
     }
