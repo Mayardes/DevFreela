@@ -56,7 +56,7 @@ public class ProjectsController : ControllerBase
         return NoContent();
     }
 
-    [HttpPost]
+    [HttpPost("id:guid")]
     public IActionResult PostComment(Guid id, [FromBody] CreateCommentInputModel model)
     {
         _projectService.CreateComment(model);
