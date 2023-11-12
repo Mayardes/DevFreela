@@ -1,7 +1,10 @@
 using System.Reflection;
-using DevFreela.Api.Models;
+using DevFreela.Application.Commands.Project;
+using DevFreela.Application.Extensions;
 using DevFreela.Application.Services.Implementations;
 using DevFreela.Application.Services.Interfaces;
+using DevFreela.Core.Repositories;
+using DevFreela.Infrastructure.Persistence;
 using DevFreela.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,9 +17,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
 builder.Services.AddDbContext<DevFreelaDbContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("DevFreelaConnectionString")));
 builder.Services.AddScoped<IProjectService, ProjectService>();
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddMediatorExtensions();
 
 var app = builder.Build();
 
