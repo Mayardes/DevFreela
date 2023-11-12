@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using DevFreela.Core.Enums;
 
 namespace DevFreela.Core.Entities;
@@ -27,21 +26,19 @@ public class Project : BaseEntity
         Description = description;
         TotalCost = totalCost;
     }
-    public string Name { get; private set; }
-    public string Title { get; private set; }
-    public string Description { get; private set; }
-    public Guid IdClient { get; private set; }
+    public string Name { get; set; }
+    public string Title { get; set; }
+    public string Description { get; set; }
+    public Guid IdClient { get; set; }
     public User Client { get; set; }
-    public Guid IdFreelancer { get; private set; }
+    public Guid IdFreelancer { get; set; }
     public User Freelancer { get; set; }
-    public decimal TotalCost { get; private set; }
-    public DateTime CreatedAt { get; private set; }
-    public DateTime? StartedAt { get; private set; }
-    public DateTime? FinishAt { get; private set; }
-    public ProjectStatusEnum Status { get; private set; }
-    public List<ProjectComment> Comments { get; private set; }
-
-
+    public decimal TotalCost { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime? StartedAt { get; set; }
+    public DateTime? FinishAt { get; set; }
+    public ProjectStatusEnum Status { get; set; }
+    public List<ProjectComment> Comments { get; set; }
     public void SetStatus(ProjectStatusEnum projectEnum)
     {
         Status = projectEnum;
