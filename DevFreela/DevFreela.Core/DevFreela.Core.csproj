@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Compile Remove="Exceptions\ProjectA,readg.cs" />
+    <Compile Remove="Entities\Freelancer.cs" />
   </ItemGroup>
 
 </Project>

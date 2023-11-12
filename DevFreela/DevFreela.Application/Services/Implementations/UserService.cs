@@ -17,7 +17,7 @@ public class UserService : IUserService
     
     public UserViewModel GetById(Guid id)
     {
-        var user = _context.User.Find(x => x.Id == id)
+        var user = _context.User.Find(id)
                    ?? throw new Exception("User not found!");
         
         return new UserViewModel()
@@ -35,7 +35,7 @@ public class UserService : IUserService
 
     public void PostComments(CreateCommentInputModel model, Guid id)
     {
-        var comment = _context.ProjectComments.Find(x => x.Id == id)
+        var comment = _context.ProjectComments.Find(id)
                       ?? throw new Exception("Post not found.");
         
         var newComment = new ProjectComment(model.Content, comment.IdProject, id);

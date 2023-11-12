@@ -7,7 +7,6 @@ public class UserSkill : BaseEntity
         IdUser = idUser;
         IdSkill = idSkill;
     }
-
     public Guid IdUser { get; private set; }
     public Guid IdSkill { get; private set; }
 }
