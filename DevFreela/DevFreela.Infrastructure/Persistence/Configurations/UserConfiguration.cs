@@ -11,8 +11,9 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.ToTable("tb_user")
             .HasKey(x => x.Id);
 
-        builder.HasOne(x => x.Skills)
-            .WithMany()
+        builder.HasMany(x => x.Skills)
+            .WithOne()
+            .HasForeignKey(x => x.IdSkill)
             .OnDelete(DeleteBehavior.Restrict);
     }
 }
