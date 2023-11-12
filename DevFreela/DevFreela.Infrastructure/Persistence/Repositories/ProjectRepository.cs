@@ -1,16 +1,20 @@
+using Dapper;
 using DevFreela.Core.Entities;
 using DevFreela.Core.Repositories;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace DevFreela.Infrastructure.Persistence.Repositories;
 
 public class ProjectRepository : IProjectRepository
 {
     private readonly DevFreelaDbContext _context;
-    
-    public ProjectRepository(DevFreelaDbContext context)
+    private readonly string _connectionString;
+    public ProjectRepository(DevFreelaDbContext context, IConfiguration configuration)
     {
         _context = context;
+        _connectionString = configuration.GetConnectionString("DevFreelaConnectionString");
     }
     public async Task<Project> GetByIdAsync(Guid id)
     {
@@ -19,7 +23,12 @@ public class ProjectRepository : IProjectRepository
 
     public async Task<ICollection<Project>> GetAsync()
     {
-        return await _context.Projects.ToListAsync();
+        using (var sqlConnection = new SqlConnection(_connectionString))
+        {
+            sqlConnection.Open();
+            var script = "SELECT Id, Name, Title FROM tb_project";
+            return sqlConnection.Query<Project>(script).ToList();
+        }
     }
 
     public async Task<Guid> AddAsync(Project model)
